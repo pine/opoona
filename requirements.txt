@@ -1,0 +1,7 @@
+docopt==0.6.2
+github3.py==0.9.6
+PyYAML==3.12
+requests==2.12.4
+six==1.10.0
+uritemplate==3.0.0
+uritemplate.py==3.0.2
