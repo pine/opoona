@@ -33,7 +33,7 @@ def get_branch():
     return _execute('git rev-parse --symbolic --abbrev-ref HEAD')
 
 def has_branch(name):
-    return _execute('git rev-parse --verify {0} --quiet'.format(name)) == name
+    return len(_execute('git rev-parse --verify {0} --quiet'.format(name))) > 0
 
 def checkout(branch):
     print('checkout {0}'.format(branch))
