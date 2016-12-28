@@ -13,8 +13,9 @@ from opoona import git
 
 class TestGetOwnerRepository(unittest.TestCase):
     def setUp(self):
-        self.tempdir = tempfile.TemporaryDirectory()
-        tarfile.open('tests/data/git.tar.bz2', 'r:bz2') \
+        self.data_dir = os.path.join(os.path.dirname(__file__), 'data')
+        self.tempdir  = tempfile.TemporaryDirectory()
+        tarfile.open(os.path.join(self.data_dir, 'git.tar.bz2'), 'r:bz2') \
             .extractall(self.tempdir.name)
         self.git_work_tree     = os.path.join(self.tempdir.name, 'git')
         self.git_dir           = os.path.join(self.git_work_tree, '.git')
@@ -96,3 +97,27 @@ class TestGetOwnerRepository(unittest.TestCase):
         message = subprocess.check_output(command, shell=True).decode('utf-8')
         self.assertEqual(message, 'chore(empty): begin task')
         self.assertEqual(stdout.getvalue(), 'create empty commit\n')
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_push(self, stdout):
+        # setup bare git repository
+        temp      = tempfile.TemporaryDirectory()
+        tar_path  = os.path.join(self.data_dir, 'bare.git.tar.bz2')
+        bare_path = os.path.join(temp.name, 'bare.git')
+        tarfile.open(tar_path, 'r:bz2').extractall(temp.name)
+
+        # set remote branch
+        command = 'git remote add origin {0}'.format(bare_path)
+        subprocess.call(command, shell=True)
+
+        # push to remote repository
+        git.push('master')
+
+        # check
+        remote_branches = subprocess.check_output('git branch -r', shell=True) \
+                .decode('utf-8')
+        self.assertIn('origin/master', remote_branches)
+        self.assertEqual(stdout.getvalue(), 'pushing to origin...\n')
+
+        # cleanup
+        temp.cleanup()
