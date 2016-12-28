@@ -3,19 +3,21 @@
 import os
 import tempfile
 import unittest
+from tempfile import NamedTemporaryFile
 
-from mock import patch
+from mock               import patch
+from backports.tempfile import TemporaryDirectory
 
 from opoona.config import Config
 
-class TestInvalidSyntaxException(unittest.TestCase):
+class TestConfig(unittest.TestCase):
     @patch('opoona.config.Config.get_config_path')
     @patch('opoona.config.Config.get_tmpl_path')
     def test_setup(self, get_tmpl_path, get_config_path):
         try:
             # create files
-            tmpl      = tempfile.NamedTemporaryFile(delete=False)
-            conf_dir  = tempfile.TemporaryDirectory()
+            tmpl      = NamedTemporaryFile(delete=False)
+            conf_dir  = TemporaryDirectory()
             conf_path = os.path.join(conf_dir.name, '.opoona.yaml')
 
             tmpl.write('TMPL'.encode('utf-8'))
@@ -45,7 +47,7 @@ class TestInvalidSyntaxException(unittest.TestCase):
         get_config_path.assert_called()
 
     def test_load(self):
-        f    = tempfile.NamedTemporaryFile(delete=False)
+        f    = NamedTemporaryFile(delete=False)
         yaml = '''\
 github:
   token: XXX
