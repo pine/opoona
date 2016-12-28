@@ -47,19 +47,20 @@ class TestConfig(unittest.TestCase):
         get_config_path.assert_called()
 
     def test_load(self):
-        f    = NamedTemporaryFile(delete=False)
-        yaml = '''\
+        try:
+            f    = NamedTemporaryFile(delete=False)
+            yaml = '''\
 github:
   token: XXX
 '''
-        f.write(yaml.encode('utf-8'))
-        f.close()
+            f.write(yaml.encode('utf-8'))
+            f.close()
 
-        config = Config()
-        config.config_path = f.name
-        config.load()
+            config = Config()
+            config.config_path = f.name
+            config.load()
 
-        self.assertIsInstance(config['github'], dict)
-        self.assertEqual(config['github']['token'], 'XXX')
-
-        os.remove(f.name)
+            self.assertIsInstance(config['github'], dict)
+            self.assertEqual(config['github']['token'], 'XXX')
+        finally:
+            os.remove(f.name)
