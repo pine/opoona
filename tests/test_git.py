@@ -93,6 +93,6 @@ class TestGetOwnerRepository(unittest.TestCase):
     def test_commit(self, stdout):
         git.commit('new-branch')
         command = 'git log -n 1 --pretty="format:%s"'
-        message = subprocess.check_output(command, shell=True)
+        message = subprocess.check_output(command, shell=True).decode('utf-8')
         self.assertEqual(message, 'chore(empty): begin task')
         self.assertEqual(stdout.getvalue(), 'create empty commit\n')
