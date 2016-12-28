@@ -6,7 +6,12 @@ import subprocess
 import six
 
 def _execute(command):
-    proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(
+        command,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
     output, _ =  proc.communicate()
     return output.strip().decode('utf-8')
 
@@ -41,9 +46,9 @@ def checkout(branch):
 
 def commit(branch):
     print('create empty commit')
-    message = six.u("'%s chore(empty): begin task'").format(branch)
-    _execute('git commit --allow-empty  -m %s'.format(message))
+    message = six.u('{0} chore(empty): begin task').format(branch)
+    _execute('git commit --allow-empty  -m \'{0}\''.format(message))
 
 def push(branch):
     print('pushing to origin...')
-    _execute('git push -u origin %s' % branch)
+    _execute('git push -u origin {0}'.format(branch))

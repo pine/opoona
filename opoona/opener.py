@@ -21,7 +21,7 @@ class Opener():
         self.repository = self._get_repository()
 
     def open(self, issue):
-        # self._check_git_status()
+        self._check_git_status()
         ticket = self._make_ticket(issue)
         base   = git.get_branch()
         self._check_branch_exists(base, ticket.branch)
@@ -47,7 +47,9 @@ class Opener():
     def _make_ticket(self, issue):
         ticket = make_github_ticket(self.config, self.repository, issue)
         if not ticket:
-            raise InvalidStatusException('invalid issue format: {0}'.format(issue))
+            raise InvalidStatusException(
+                'invalid issue format: {0}'.format(issue)
+            )
         return ticket
 
     def _create_pull_request(self, base, ticket):
@@ -59,8 +61,13 @@ class Opener():
             head  = ticket.branch,
             body  = six.u('{0}\n\n### Tasks\n\n- [ ] ').format(ticket.url),
         )
-        issue = self.github.issue(pull.number)
-        issue.add_labels('WIP')
+
+        labels = self.config['github']['labels']
+        if isinstance(labels, list):
+            issue = self.github.issue(pull.number)
+            for label in labels:
+                issue.add_labels(label)
+
         return pull
 
     def _check_git_status(self):
@@ -78,12 +85,12 @@ class Opener():
     def _check_branch_exists(self, base, branch):
         if base == branch:
             raise InvalidStatusException("\n".join([
-                'try to create {0} branch, but it is current branch.'.format(branch),
+                '`{0}` branch is current branch.'.format(branch),
                 'check `git status`',
             ]))
         if git.has_branch(branch):
             raise InvalidStatusException("\n".join([
-                'try to create {0} branch, but it is already exists.'.format(branch),
+                '`{0}` branch is already exists.'.format(branch),
                 'check `git branch`',
             ]))
 
