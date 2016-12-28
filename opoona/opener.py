@@ -30,7 +30,7 @@ class Opener():
         git.commit(ticket.branch)
         git.push(ticket.branch)
 
-        pull_request = self._create_pull_request(base, ticket)
+        pull = self._create_pull_request(base, ticket)
         print('done! {0}'.format(pull.html_url))
 
     def _get_repository(self):
