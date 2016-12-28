@@ -64,7 +64,7 @@ class Opener():
 
         labels = self.config['github']['labels']
         if isinstance(labels, list):
-            issue = self.github.issue(pull.number)
+            issue = self.repository.issue(pull.number)
             for label in labels:
                 issue.add_labels(label)
 
