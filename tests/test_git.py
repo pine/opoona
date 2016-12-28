@@ -5,9 +5,9 @@ import unittest
 import tarfile
 import subprocess
 
+import six
 from backports import tempfile
 from mock      import patch
-from StringIO  import StringIO
 
 from opoona import git
 
@@ -82,14 +82,14 @@ class TestGetOwnerRepository(unittest.TestCase):
     def test_has_branch_not_exists(self):
         self.assertFalse(git.has_branch('XXX-unknown'))
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch('sys.stdout', new_callable=six.StringIO)
     def test_checkout(self, stdout):
         self.assertEqual(git.get_branch(), 'master')
         git.checkout('new-branch')
         self.assertEqual(git.get_branch(), 'new-branch')
         self.assertEqual(stdout.getvalue(), 'checkout new-branch\n')
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch('sys.stdout', new_callable=six.StringIO)
     def test_commit(self, stdout):
         git.commit('new-branch')
         command = 'git log -n 1 --pretty="format:%s"'
