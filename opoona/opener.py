@@ -59,8 +59,8 @@ class Opener():
             head  = ticket.branch,
             body  = six.u('{0}\n\n### Tasks\n\n- [ ] ').format(ticket.url),
         )
-        # issue = self.github.issue(pull.number)
-        # issue.add_labels('WIP')
+        issue = self.github.issue(pull.number)
+        issue.add_labels('WIP')
         return pull
 
     def _check_git_status(self):
