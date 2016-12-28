@@ -1,0 +1,5 @@
+backports.tempfile==1.0rc1
+backports.weakref==1.0rc1
+funcsigs==1.0.2
+mock==2.0.0
+pbr==1.10.0

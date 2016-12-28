@@ -46,8 +46,8 @@ def checkout(branch):
 
 def commit(branch):
     print('create empty commit')
-    message = six.u('{0} chore(empty): begin task').format(branch)
-    _execute('git commit --allow-empty  -m \'{0}\''.format(message))
+    message = six.u('chore(empty): begin task')
+    _execute(six.u('git commit --allow-empty  -m \'{0}\'').format(message))
 
 def push(branch):
     print('pushing to origin...')
