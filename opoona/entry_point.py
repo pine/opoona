@@ -24,7 +24,11 @@ def main():
     args = docopt.docopt(__doc__, version='0.0.7')
 
     if args['setup']:
-        Config.setup()
+        try:
+            Config.setup()
+        except Exception as e:
+            print(e)
+            sys.exit(1)
         sys.exit(0)
 
     config = Config()
