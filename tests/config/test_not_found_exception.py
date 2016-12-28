@@ -11,5 +11,5 @@ class TestNotFoundException(unittest.TestCase):
 
     def test_str(self):
         exception = NotFoundException('XXX/config_path')
-        expect    = "XXX/config_path is required\nTry to exec `opoona setup`"
+        expect    = "XXX/config_path is required\ntry to exec `opoona setup`"
         self.assertEqual(str(exception), expect)
