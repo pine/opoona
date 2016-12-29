@@ -114,9 +114,9 @@ class TestGetOwnerRepository(unittest.TestCase):
         git.push('master')
 
         # check
-        remote_branches = subprocess.check_output('git branch -r', shell=True) \
-                .decode('utf-8')
-        self.assertIn('origin/master', remote_branches)
+        command = 'git ls-remote origin master'
+        remote  = subprocess.check_output(command, shell=True).decode('utf-8')
+        self.assertGreater(len(remote), 0)
         self.assertEqual(stdout.getvalue(), 'pushing to origin...\n')
 
         # cleanup
