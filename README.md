@@ -24,7 +24,7 @@ $ opoona setup
 `/home/username/.opoona.yaml` is created.
 
 $ vim ~/.opoona.yaml
-# edit your `opoona` setting
+# edit your `opoona` settings
 
 $ opoona issues-1
 fetching github issue...
