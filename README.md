@@ -1,6 +1,8 @@
 # Opoona
 > The thicket opener
 
+Opoona is the tool for developer. If you had used Opoona, you may start coding so very speedy like Ninja!
+
 ## Requirements
 
 - Git
