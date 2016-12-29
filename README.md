@@ -12,6 +12,33 @@
 $ pip install git+https://github.com/pine/opoona.git
 ```
 
+## Usage
+
+```
+$ opoona
+usage:
+    opoona setup
+    opoona <issue>
+
+$ opoona setup
+`/home/username/.opoona.yaml` is created.
+
+$ vim ~/.opoona.yaml
+# edit your `opoona` setting
+
+$ opoona issues-1
+fetching github issue...
+checkout issues/1
+create empty commit
+pushing to origin...
+creating pull request...
+  master <- issues/1
+  done! https://github.com/pine/opoona/pull/8
+```
+
+Enjoy :tada: :tada: :tada:
+
+
 ## Development
 ### venv
 For Python 2.7.x users:
