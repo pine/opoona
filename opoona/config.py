@@ -51,6 +51,8 @@ class Config(dict):
             with open(config_path, 'w') as conf:
                 conf.write(tmpl.read())
 
+        print('`{0}` is created.'.format(config_path))
+
     def __init__(self):
         self.config_path = Config.get_config_path()
 
