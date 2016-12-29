@@ -21,7 +21,7 @@ from .config import Config
 from .opener import Opener
 
 def main():
-    args = docopt.docopt(__doc__, version='0.0.7')
+    args = docopt.docopt(__doc__, version='0.1.0')
 
     if args['setup']:
         try:
