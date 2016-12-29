@@ -9,7 +9,7 @@
 ## Getting Started
 
 ```
-$ pip install https://github.com/pine/opoona.git
+$ pip install git+https://github.com/pine/opoona.git
 ```
 
 ## Development
