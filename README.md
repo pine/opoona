@@ -1,4 +1,4 @@
-# Opoona
+# Opoona [![Build Status](https://travis-ci.org/pine/opoona.svg?branch=master)](https://travis-ci.org/pine/opoona)
 > The thicket opener
 
 Opoona is the tool for developer.
