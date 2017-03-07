@@ -2,3 +2,6 @@ github:
   token: your_github_personal_token
   labels:
     - WIP
+
+jira:
+

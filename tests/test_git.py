@@ -11,7 +11,7 @@ from six       import StringIO
 
 from opoona import git
 
-class TestGetOwnerRepository(unittest.TestCase):
+class TestGet(unittest.TestCase):
     def setUp(self):
         self.data_dir = os.path.join(os.path.dirname(__file__), 'data')
         self.tempdir  = tempfile.TemporaryDirectory()
