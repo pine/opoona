@@ -13,6 +13,7 @@ setuptools.setup(
     url              = 'http://github.com/pine/opoona',
     keywords         = 'opoona git issue github',
     packages         = ['opoona', 'opoona.tickets'],
+    package_data     = {'opoona': ['*.yaml']},
     entry_points     = {'console_scripts': ['opoona = opoona:main']},
     install_requires = [
         'docopt >= 0.6.2',
